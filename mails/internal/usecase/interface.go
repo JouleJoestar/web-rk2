@@ -2,7 +2,6 @@ package usecase
 
 import "mail/internal/entities"
 
-// Provider интерфейс для работы с данными
 type Provider interface {
 	SendMail(mail entities.Mail) error
 	GetMailsByUserID(userID int) ([]entities.Mail, error)

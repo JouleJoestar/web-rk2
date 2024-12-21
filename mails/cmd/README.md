@@ -1,6 +1,6 @@
 1. Отправка письма
 Метод: POST
-URL: http://<ваш_сервер>:<порт>/mails
+URL: http://localhost:8089/mails
 Тело запроса (JSON):
 {
     "theme": "Hello World",

@@ -2,7 +2,6 @@ package api
 
 import "mail/internal/entities"
 
-// Usecase интерфейс для работы с почтовыми операциями
 type Usecase interface {
 	SendMail(mail entities.Mail) error
 	GetMailsByUserID(userID int) ([]entities.Mail, error)

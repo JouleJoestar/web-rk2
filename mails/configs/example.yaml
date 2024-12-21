@@ -1,4 +1,4 @@
-ip: "localhost"
+ip: "127.0.0.1"
 port: 8089
 db:
   host: "localhost"
@@ -7,6 +7,6 @@ db:
   password: "postgres"
   dbname: "mail"
 mail_theme_min_len: 3
-mail_theme_max_len: 1000
+mail_theme_max_len: 500
 mail_text_min_len: 4
-mail_text_max_len: 1000
+mail_text_max_len: 500

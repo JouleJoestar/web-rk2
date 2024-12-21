@@ -11,22 +11,22 @@ import (
 type Server struct {
 	server   *echo.Echo
 	address  string
-	uc       Usecase // Интерфейс для работы с пользователями
+	uc       Usecase
 	validate *validator.Validate
-	cfg      *config.Config // Добавлено поле для конфигурации
+	cfg      *config.Config
 }
 
 func NewServer(ip string, port int, userUc Usecase, cfg *config.Config) *Server {
 	api := Server{
 		uc:       userUc,
 		validate: validator.New(),
-		cfg:      cfg, // Инициализация валидатора
+		cfg:      cfg,
 	}
 
 	api.server = echo.New()
-	api.server.POST("/mails", api.SendMail)         // Отправка письма
-	api.server.GET("/mails/:user_id", api.GetMails) // Получение списка писем для пользователя
-	api.server.DELETE("/mails/:id", api.DeleteMail) // Удаление письма
+	api.server.POST("/mails", api.SendMail)
+	api.server.GET("/mails/:user_id", api.GetMails)
+	api.server.DELETE("/mails/:id", api.DeleteMail)
 
 	api.address = ip + ":" + strconv.Itoa(port)
 

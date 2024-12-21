@@ -7,13 +7,12 @@ import (
 )
 
 var (
-	ErrMessageLengthInvalid = errors.New("message length must be between 5 and 1000 characters")
+	ErrMessageLengthInvalid = errors.New("invalid lenght")
 	ErrInvalidEmailFormat   = errors.New("invalid email format")
 	ErrMailNotFound         = errors.New("mail not found")
 	ErrUserNotFound         = errors.New("user not found")
 )
 
-// Validate проверяет корректность полей структуры Mail
 func (m *Mail) Validate(cfg *config.Config) error {
 	if len(m.Theme) < cfg.MailThemeMinLen || len(m.Theme) > cfg.MailThemeMaxLen {
 		return errors.New("theme length must be between " + strconv.Itoa(cfg.MailThemeMinLen) + " and " + strconv.Itoa(cfg.MailThemeMaxLen) + " characters")
