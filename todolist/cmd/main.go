@@ -3,16 +3,15 @@ package main
 import (
 	"flag"
 	"log"
+	"todolist/internal/api"
+	"todolist/internal/config"
+	"todolist/internal/provider"
+	"todolist/internal/usecase"
 
-	"github.com/ValeryBMSTU/web-rk2/internal/api"
-	"github.com/ValeryBMSTU/web-rk2/internal/config"
-	"github.com/ValeryBMSTU/web-rk2/internal/provider"
-	"github.com/ValeryBMSTU/web-rk2/internal/usecase"
 	_ "github.com/lib/pq"
 )
 
 func main() {
-	// Считываем аргументы командной строки
 	configPath := flag.String("config-path", "../configs/example.yaml", "путь к файлу конфигурации")
 	flag.Parse()
 
@@ -22,8 +21,10 @@ func main() {
 	}
 
 	prv := provider.NewProvider(cfg.DB.Host, cfg.DB.Port, cfg.DB.User, cfg.DB.Password, cfg.DB.DBname)
-	use := usecase.NewUsecase(prv)
-	srv := api.NewServer(cfg.IP, cfg.Port, use)
+
+	uc := usecase.NewUsecase(prv) // Создаем новый usecase, передавая провайдер
+
+	srv := api.NewServer(cfg.IP, cfg.Port, uc) // Передаем usecase в сервер API
 
 	srv.Run()
 }
